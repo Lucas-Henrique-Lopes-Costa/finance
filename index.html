@@ -1,51 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>dev.finance$</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
-    <h1>dev.finance$</h1>
+    <header>
+      <h1 id="logo">dev.finance$</h1>
+    </header>
 
-    <h2>Balanço</h2>
-    <h3>Entradas</h3>
-    <p>R$ 5.000,00</p>
+    <main>
+      <section id="balance">
+        <h2>Balanço</h2>
 
-    <h3>Saída</h3>
-    <p>R$ 2.000,00</p>
+        <div class="card">
+          <h3>Entradas</h3>
+          <p>R$ 5.000,00</p>
+        </div>
 
-    <h3>Total</h3>
-    <p>R$ 3.000,00</p>
+        <div class="card">
+          <h3>Saída</h3>
+          <p>R$ 2.000,00</p>
+        </div>
 
-    <h2>Transações</h2>
+        <div class="card">
+          <h3>Total</h3>
+          <p>R$ 3.000,00</p>
+        </div>
+      </section>
 
-    <table>
-      <thead>
-        <tr>
-          <!-- Row = Linha -->
-          <th>Descrição</th>
-          <th>Valor</th>
-          <th>Data</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Luz</td>
-          <tb>R$ 500,00</tb>
-          <tb>23/01/2021</tb>
-        </tr>
-        <tr>
-          <td>Criação Website</td>
-          <tb>R$ 5.000,00</tb>
-          <tb>23/01/2021</tb>
-        </tr>
-        <tr>
-          <td>Internet</td>
-          <tb>R$ 80,00</tb>
-          <tb>23/01/2021</tb>
-        </tr>
-      </tbody>
-    </table>
+      <section id="transaction">
+        <h2>Transações</h2>
+        <table id="data-table">
+          <thead>
+            <tr>
+              <!-- Row = Linha -->
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Luz</td>
+              <td>R$ 500,00</td>
+              <td>23/01/2021</td>
+            </tr>
+            <tr>
+              <td>Criação Wedsite</td>
+              <td>R$ 5.000,00</td>
+              <td>23/01/2021</td>
+            </tr>
+            <tr>
+              <td>Internet</td>
+              <td>R$ 80,00</td>
+              <td>23/01/2021</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      <p>dev.finance$</p>
+    </footer>
   </body>
 </html>

@@ -1,0 +1,14 @@
+* {
+    /*color: red !important; /* Trata esse atributo como muito importante, sendo o úlitmo */
+    
+    color: green;
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* contar pela borda, devine no tamanho total */
+}
+
+body {
+    background: #F0F2F5;
+    font-family: 'Poppins', sans-serif;
+}
