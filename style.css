@@ -1,14 +1,146 @@
+/*========================== Global ==========================*/
+:root {
+  --dark-blue: #363f5f;
+}
+
 * {
-    /*color: red !important; /* Trata esse atributo como muito importante, sendo o úlitmo */
-    
-    color: green;
-    
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* contar pela borda, devine no tamanho total */
+  /*color: red !important; /* Trata esse atributo como muito importante, sendo o úlitmo */
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* contar pela borda, devine no tamanho total */
 }
 
 body {
-    background: #F0F2F5;
-    font-family: 'Poppins', sans-serif;
+  background: #f0f2f5;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: min(90vw, 800px);
+  /*view port | quando estiver maior que 90vw ele limita à 800px*/
+
+  margin: auto; /*balanceia ele no meio*/
+}
+
+/*======================= Titles =======================*/
+h2 {
+  margin-top: 3.2rem;
+  margin-bottom: 0.8rem;
+
+  color: var(--dark-blue);
+  font-weight: normal;
+}
+
+/*======================= Header =======================*/
+header {
+  background: #2d4a22;
+  padding: 2rem 0 10rem;
+  text-align: center;
+}
+
+header h1 {
+  color: #fff;
+  font-weight: 100;
+}
+
+/*========================= Balance =========================*/
+#balance {
+  margin-top: -8rem;
+}
+
+#balance h2 {
+  color: white;
+  margin-top: 0;
+}
+
+/*========================= Footer =========================*/
+.card {
+  background: white;
+  padding: 1.5rem 2rem;
+
+  border-radius: 0.25rem;
+
+  margin-bottom: 2rem;
+
+  color: var(--dark-blue);
+}
+
+.card h3 {
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.card p {
+  font-size: 2rem;
+  line-height: 3rem;
+
+  margin-top: 1rem;
+}
+
+.card.total {
+  background: #3ce209;
+  color: white;
+}
+
+/*======================= Transações =======================*/
+#data-table {
+  width: 100%; /*pega todo o espaço do container*/
+  border-spacing: 0 0.5rem; /*lateral, eixo vertical, eixo horizontal*/
+  color: #996cb3;
+
+  cursor: pointer;
+}
+
+table thead tr th:first-child,
+table tbody tr td:first-child {
+  /*pega a primeira coluda da tabela*/
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
+table th {
+  background: white;
+  opacity: 0.6;
+
+  font-weight: normal;
+  color: #996cb3;
+
+  padding: 1rem 2rem;
+
+  text-align: left;
+}
+
+table tbody tr {
+  opacity: 0.7;
+}
+
+table tbody tr:hover {
+  opacity: 1;
+}
+
+table tbody td {
+  background: white;
+
+  padding: 1rem 2rem; /*1rem em cima e em baixo | e 2 rem nas laterais*/
+}
+
+td.description {
+  color: var(--dark-blue);
+}
+
+td.income {
+  color: #12a454;
+}
+
+td.expense {
+  color: #e92929;
+}
+
+/*========================= Footer =========================*/
+footer {
+  text-align: center;
+  padding: 4rem 0 2em;
+  color: car(--darkk-blue);
+
+  opacity: 0.6;
 }
