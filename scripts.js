@@ -14,29 +14,23 @@ const Modal = {
   },
 };
 
+// :Salvando os dados
+const Storage = {
+  get() {
+    return JSON.parse(localStorage.getItem("dev.finances:transactions")) || []; // *parse transforma a string para array
+  },
+  set(transactions) {
+    localStorage.setItem(
+      "dev.finances:transactions",
+      JSON.stringify(transactions)
+    );
+  },
+};
+
 // :Calculo das transações
 const Transaction = {
   // :transações
-  all: [
-    {
-      id: 1,
-      description: "Luz",
-      amount: -50000,
-      date: "23/01/2021",
-    },
-    {
-      id: 2,
-      description: "WebSite",
-      amount: 500000,
-      date: "23/01/2021",
-    },
-    {
-      id: 3,
-      description: "Internet",
-      amount: -20000,
-      date: "23/01/2021",
-    },
-  ],
+  all: Storage.get(),
 
   add(transaction) {
     Transaction.all.push(transaction);
@@ -55,7 +49,7 @@ const Transaction = {
     let income = 0;
 
     // para cada transação pegada
-    Transaction.all.forEach(transaction => {
+    Transaction.all.forEach((transaction) => {
       if (transaction.amount > 0) {
         income += transaction.amount;
       }
@@ -63,11 +57,12 @@ const Transaction = {
 
     return income;
   },
+
   expenses() {
     // !somar as saídas
     let expense = 0;
 
-    Transaction.all.forEach(transaction => {
+    Transaction.all.forEach((transaction) => {
       if (transaction.amount < 0) {
         expense += transaction.amount;
       }
@@ -75,6 +70,7 @@ const Transaction = {
 
     return expense;
   },
+
   total() {
     // *entradas - saídas
 
@@ -90,13 +86,14 @@ const DOM = {
   // *Cria a tag HTML
   addTransaction(transaction, index) {
     const tr = document.createElement("tr"); // criando uma tag HTML
-    tr.innerHTML = DOM.innerHTMLTransaction(transaction); // adicionando um HTML nessa tag
+    tr.innerHTML = DOM.innerHTMLTransaction(transaction, index); // adicionando um HTML nessa tag
+    tr.dataset.index = index;
 
     DOM.transactionsContainer.appendChild(tr);
   },
 
   // *Pega os dados
-  innerHTMLTransaction(transaction) {
+  innerHTMLTransaction(transaction, index) {
     // ?substitui o HTML
     const CSSclass = transaction.amount > 0 ? "income" : "expense"; // verificando se o dado é maior que
 
@@ -107,7 +104,7 @@ const DOM = {
     <td class="${CSSclass}">${amount}</td>
     <td class="date">${transaction.date}</td>
     <td>
-      <img src="./assets/minus.svg" alt="Remover Transação" />
+      <img  onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover Transação" />
     </td>
     `;
 
@@ -198,15 +195,11 @@ const Form = {
 
     date = Utils.formatDate(date);
 
-    return { 
-      description, 
-      amount, 
-      date 
+    return {
+      description,
+      amount,
+      date,
     };
-  },
-
-  saveTransaction(transaction) {
-    Transaction.add(transaction);
   },
 
   clearFields() {
@@ -221,21 +214,61 @@ const Form = {
     try {
       // :verficar as informações (ver se esá preenchida)
       Form.validateFields();
+    } catch (error) {
+      alert(error.message);
+      console.log(
+        "verficar as informaçõe" + Form.description.value,
+        Form.amount.value,
+        Form.date.value
+      );
+    }
 
+    try {
       // :formatar os dados para
       const transaction = Form.formatValues();
+    } catch (error) {
+      alert(error.message);
+      console.log(
+        "formatar os dados para" + Form.description.value,
+        Form.amount.value,
+        Form.date.value
+      );
+    }
 
+    try {
       // :salvar o formulário
-      Form.saveTransaction();
+      Transaction.add(transaction);
+    } catch (error) {
+      alert(error.message);
+      console.log(
+        "salvar o formulário" + Form.description.value,
+        Form.amount.value,
+        Form.date.value
+      );
+    }
 
+    try {
       // :apagar os dados do Formulários
       Form.clearFields();
+    } catch (error) {
+      alert(error.message);
+      console.log(
+        "apagar os dados do Formulários" + Form.description.value,
+        Form.amount.value,
+        Form.date.value
+      );
+    }
 
+    try {
       // :fechar o modal
       Modal.close();
     } catch (error) {
       alert(error.message);
-      console.log(Form.description.value, Form.amount.value, Form.date.value);
+      console.log(
+        "fechar o modal" + Form.description.value,
+        Form.amount.value,
+        Form.date.value
+      );
     }
   },
 };
@@ -244,11 +277,12 @@ const Form = {
 const App = {
   init() {
     // 'forEach' serve para quanto temos um Array, que executa para cada elemeneto uma função
-    Transaction.all.forEach((transaction) => {
-      DOM.addTransaction(transaction);
-    });
-
+    Transaction.all.forEach(DOM.addTransaction);
+    
     DOM.updateBalance();
+    
+    Storage.set(Transaction.all);
+
   },
   reload() {
     DOM.clearTransactions();
