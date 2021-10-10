@@ -1,154 +1,133 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>dev.finance$</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>dev.finance$</title>
 
-    <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="./style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <img src="./assets/logo.svg" alt="Logo Dev Finance">
+        </header>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
+        <main class="container">
+            <section id="balance">
+                <h2 class="sr-only">Balanço</h2>
 
-    <link rel="shortcut icon" href="./assets/income.svg" type="image/x-icon">
-  </head>
+                <div class="card">
+                    <h3>
+                        <span>
+                            Entradas
+                        </span>
+                        <img src="./assets/income.svg" alt="Image de entradas">
+                    </h3>
+                    <p id="incomeDisplay">R$ 0,00</p>
+                </div>
 
-  <body>
-    <header>
-      <img src="./assets/logo.svg" alt="Logo Dev Finance" />
-    </header>
+                <div class="card">
+                    <h3>
+                        <span>
+                            Saídas
+                        </span>
+                        <img src="./assets/expense.svg" alt="Image de saídas">
+                    </h3>
+                    <p id="expenseDisplay">R$ 0,00</p>
+                </div>
 
-    <main class="container">
-      <section id="balance">
-        <h2 class="sr-only">Balanço</h2>
-        <!-- Escondendo na parte visual, mas mostrando para o mecanismo de busca -->
+                <div class="card total">
+                    <h3>
+                        <span>
+                            Total
+                        </span>
+                        <img src="./assets/total.svg" alt="Image de total">
+                    </h3>
+                    <p id="totalDisplay">R$ 0,00</p>
+                </div>
+                
+            </section>
 
-        <div class="card entrada">
-          <h3>
-            <span>
-              <!-- caixa genérica que mantem o elemento em linha -->
-              Entradas
-              <img src="./assets/income.svg" alt="Imagens de Entradas" />
-            </span>
-          </h3>
+            <section id="transaction">
+                <h2 class="sr-only">Transações</h2>
 
-          <p id="incomeDisplay">R$ 5.000,00</p>
+                <a href="#" 
+                onclick="Modal.open()"
+                class="button new">+ Nova Transação</a>
+                
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <div class="modal-overlay">
+            <div class="modal">
+                <div id="form">
+                    <h2>Nova Transação</h2>
+                    <form action="" onsubmit="Form.submit(event)">
+                        <div class="input-group">
+                            <label 
+                                class="sr-only" 
+                                for="description">Descrição</label>
+                            <input 
+                                type="text" 
+                                id="description" 
+                                name="description"
+                                placeholder="Descrição"
+                            />
+                        </div>
+
+                        <div class="input-group">
+                            <label 
+                                class="sr-only" 
+                                for="amount">Valor</label>
+                            <input 
+                                type="number"
+                                step="0.01"
+                                id="amount" 
+                                name="amount"
+                                placeholder="0,00"
+                            />
+                            <small class="help">Use o sinal - (negativo) para despesas e , (vírgula) para casas decimais</small>
+                        </div>
+
+                        <div class="input-group">
+                            <label 
+                                class="sr-only" 
+                                for="date">Data</label>
+                            <input 
+                                type="date" 
+                                id="date" 
+                                name="date"
+                            />
+                        </div>
+
+                        <div class="input-group actions">
+                            <a 
+                            onclick="Modal.close()"
+                            href="#" 
+                            class="button cancel">Cancelar</a>
+                            <button>Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <div class="card saida">
-          <h3>
-            <span>
-              <!-- caixa genérica que mantem o elemento em linha -->
-              Saídas
-              <img src="./assets/expense.svg" alt="Imagens de Saída" />
-            </span>
-          </h3>
+        <footer><p>dev.finance$</p></footer>
 
-          <p id="expensesDisplay">R$ 2.000,00</p>
-        </div>
-
-        <div class="card total">
-          <h3>
-            <span>
-              <!-- caixa genérica que mantem o elemento em linha -->
-              Total
-              <img src="./assets/total.svg" alt="Imagens dO Total" />
-            </span>
-          </h3>
-
-          <p id="totalDisplay">R$ 3.000,00</p>
-        </div>
-      </section>
-
-      <section id="transaction">
-        <h2 class="sr-only">Transações</h2>
-
-        <a href="#" class="button new" onclick="Modal.open()"
-          >+ Nova Transação</a
-        >
-        <!-- Para chamar uma função no JavaScript usa-se onclick="nomeDaFunção()" -->
-
-        <table id="data-table">
-          <thead>
-            <tr>
-              <!-- Row = Linha -->
-              <th class="description">Descrição</th>
-              <th class="expense">Valor</th>
-              <th class="date">Data</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            
-          </tbody>
-        </table>
-      </section>
-    </main>
-
-    <div class="modal-overlay">
-      <!-- irá aparecer quando tiver a class "active" -->
-      <div class="modal">
-        <div id="form">
-          <h2>Nova Transação</h2>
-          <form action="" onsubmit="Form.submit(event)">
-            <div class="input-group">
-              <label class="sr-only" for="description">Descrição</label>
-              <!-- Mostra para que é o input -->
-              <input
-                type="text"
-                id="description"
-                name="description"
-                placeholder="Descrição"
-              />
-              <!-- utiliza os dispositivos de IO para pegar o seu input -->
-            </div>
-
-            <div class="input-group">
-              <label class="sr-only" for="amount">Valor</label>
-              <input
-                type="number"
-                step="0.01"
-                id="amount"
-                name="amount"
-                placeholder="0,00"
-              />
-              <!-- Texto Menor -->
-              <small class="help"
-                >Use o sinal - (negativo) para despesas e , (vírgula) para casas
-                deciamis</small
-              >
-            </div>
-
-            <div class="input-group">
-              <label class="sr-only" for="date">date</label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                placeholder="Descrição"
-              />
-            </div>
-
-            <div class="input-group actions">
-              <a href="#" class="button cancel" onclick="Modal.close()"
-                >Cancelar</a
-              >
-              <button>Salvar</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <footer>
-      <p>dev.finance$</p>
-    </footer>
-
-    <script src="./scripts.js">
-      
-    </script>
-  </body>
+        <script src="./scripts.js"></script>
+    </body>
 </html>
